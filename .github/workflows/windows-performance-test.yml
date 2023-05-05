@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
 
-  build_windows:
+  build_msvc_gcc:
     name: Build MSVC then GCC
     runs-on: windows-latest
 
@@ -35,7 +35,7 @@ jobs:
       - name: MinGW make test
         run: make test QUIET=1
 
-  build_windows:
+  build_gcc_msvc:
     name: Build GCC then MSVC
     runs-on: windows-latest
 
