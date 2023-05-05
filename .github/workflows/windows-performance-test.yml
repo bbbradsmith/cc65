@@ -1,0 +1,68 @@
+name: Windows Performance Test
+on: [pull_request]
+
+jobs:
+
+  build_windows:
+    name: Build MSVC then GCC
+    runs-on: windows-latest
+
+    steps:
+      - shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: MSVC Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: MSVC Build app (release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+      - name: MSVC make lib
+        run: make -j2 lib QUIET=1
+      - name: MSVC make test
+        run: make test QUIET=1
+
+      - name: Blank Slate
+        run: rm -f *
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: MinGW Build app
+        run: make -j2 bin USER_CFLAGS=-Werror
+      - name: MinGW make lib
+        run: make -j2 lib QUIET=1
+      - name: MinGW make test
+        run: make test QUIET=1
+
+  build_windows:
+    name: Build GCC then MSVC
+    runs-on: windows-latest
+
+    steps:
+      - shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: MinGW Build app
+        run: make -j2 bin USER_CFLAGS=-Werror
+      - name: MinGW make lib
+        run: make -j2 lib QUIET=1
+      - name: MinGW make test
+        run: make test QUIET=1
+
+      - name: Blank Slate
+        run: rm -f *
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: MSVC Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: MSVC Build app (release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+      - name: MSVC make lib
+        run: make -j2 lib QUIET=1
+      - name: MSVC make test
+        run: make test QUIET=1
