@@ -8,9 +8,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - shell: bash
+      - name: Git Configure
+        shell: bash
         run: git config --global core.autocrlf input
-
       - name: Checkout Source
         uses: actions/checkout@v3
 
@@ -24,7 +24,11 @@ jobs:
         run: make test QUIET=1
 
       - name: Blank Slate
-        run: rm -f *
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
       - name: Checkout Source
         uses: actions/checkout@v3
 
@@ -40,7 +44,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - shell: bash
+      - name: Git Configure
+        shell: bash
         run: git config --global core.autocrlf input
 
       - name: Checkout Source
@@ -54,7 +59,11 @@ jobs:
         run: make test QUIET=1
 
       - name: Blank Slate
-        run: rm -f *
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
       - name: Checkout Source
         uses: actions/checkout@v3
 
