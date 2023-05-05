@@ -3,75 +3,119 @@ on: [pull_request]
 
 jobs:
 
-  build_msvc_gcc:
-    name: Build MSVC then GCC
+  test_pwsh_bash:
+    name: Test pwsh bash
     runs-on: windows-latest
-
     steps:
       - name: Git Configure
         shell: bash
         run: git config --global core.autocrlf input
       - name: Checkout Source
         uses: actions/checkout@v3
-
       - name: MSVC Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: MSVC Build app (release)
         run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
       - name: MSVC make lib
+        shell: pwsh
         run: make -j2 lib QUIET=1
       - name: MSVC make test
+        shell: pwsh
         run: make test QUIET=1
 
       - name: Blank Slate
         shell: bash
         run: ls -A1 | xargs rm -rf
+
       - name: Git Configure
         shell: bash
         run: git config --global core.autocrlf input
       - name: Checkout Source
         uses: actions/checkout@v3
-
-      - name: MinGW Build app
-        run: make -j2 bin USER_CFLAGS=-Werror
-      - name: MinGW make lib
+      - name: MSVC Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: MSVC Build app (release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+      - name: MSVC make lib
+        shell: bash
         run: make -j2 lib QUIET=1
-      - name: MinGW make test
+      - name: MSVC make test
+        shell: bash
         run: make test QUIET=1
 
-  build_gcc_msvc:
-    name: Build GCC then MSVC
+  test_bash_pwsh
+    name: Test bash pwsh
     runs-on: windows-latest
-
     steps:
       - name: Git Configure
         shell: bash
         run: git config --global core.autocrlf input
-
       - name: Checkout Source
         uses: actions/checkout@v3
-
-      - name: MinGW Build app
-        run: make -j2 bin USER_CFLAGS=-Werror
-      - name: MinGW make lib
-        run: make -j2 lib QUIET=1
-      - name: MinGW make test
-        run: make test QUIET=1
-
-      - name: Blank Slate
-        shell: bash
-        run: ls -A1 | xargs rm -rf
-      - name: Git Configure
-        shell: bash
-        run: git config --global core.autocrlf input
-      - name: Checkout Source
-        uses: actions/checkout@v3
-
       - name: MSVC Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: MSVC Build app (release)
         run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
       - name: MSVC make lib
+        shell: bash
         run: make -j2 lib QUIET=1
       - name: MSVC make test
+        shell: bash
+        run: make test QUIET=1
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      - name: MSVC Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: MSVC Build app (release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+      - name: MSVC make lib
+        shell: pwsh
+        run: make -j2 lib QUIET=1
+      - name: MSVC make test
+        shell: pwsh
+        run: make test QUIET=1
+
+  build_cmd:
+    name: Build cmd
+    runs-on: windows-latest
+    steps:
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      - name: MSVC Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: MinGW Build app
+        shell: cmd
+        run: make -j2 bin USER_CFLAGS=-Werror
+        # trying test with MSVC build instead just because we don't expect to get this far anyway.
+
+  test_cmd:
+    name: Test cmd
+    runs-on: windows-latest
+    steps:
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      - name: MSVC Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+        # should we dare try make to build with MinGW in cmd?
+      - name: MSVC Build app (release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+      - name: MSVC make lib
+        shell: cmd
+        run: make -j2 lib QUIET=1
+      - name: MSVC make test
+        shell: cmd
         run: make test QUIET=1
