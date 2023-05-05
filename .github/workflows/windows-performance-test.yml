@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: make test QUIET=1
 
-  test_bash_pwsh
+  test_bash_pwsh:
     name: Test bash pwsh
     runs-on: windows-latest
     steps:
