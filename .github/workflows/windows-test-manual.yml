@@ -1,8 +1,11 @@
 name: Windows Test Manual
 # Manually dispatched because it's much slower than the Linux test.
 
-on:
-  workflow_dispatch:
+#on:
+#  workflow_dispatch:
+
+# to test
+on: [pull_request]
 
 jobs:
   build_windows:
