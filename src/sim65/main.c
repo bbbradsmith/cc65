@@ -36,6 +36,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <limits.h>
 
 /* common */
 #include "abend.h"
@@ -140,6 +141,10 @@ static void OptQuitXIns (const char* Opt attribute ((unused)),
 /* quit after MaxCycles cycles */
 {
     MaxCycles = strtoul(Arg, NULL, 0);
+    /* Guard against overflow. */
+    if (MaxCycles == ULONG_MAX && errno == ERANGE) {
+        Error("'-x parameter out of range. Max: %lu",ULONG_MAX);
+    }
 }
 
 static unsigned char ReadProgramFile (void)
@@ -184,6 +189,7 @@ static unsigned char ReadProgramFile (void)
     }
 
     /* Get load address */
+    Val2 = 0; /* suppress uninitialized variable warning */
     if (((Val = fgetc(F)) == EOF) ||
         ((Val2 = fgetc(F)) == EOF)) {
         Error ("'%s': Header missing load address", ProgramFile);
