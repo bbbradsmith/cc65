@@ -31,4 +31,7 @@ endef
 $(foreach subdir,$(SUBDIRS),$(eval $(call CALL_template,$(subdir))))
 
 clean: mostlyclean
+	echo test\asm: clean
+	echo off
+	echo on
 	@$(call RMDIR,$(WORKDIR))

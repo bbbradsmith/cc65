@@ -45,6 +45,9 @@ $(WORKDIR):
 define PRG_template
 
 $(WORKDIR)/%.$1.prg: %.s | $(WORKDIR)
+	echo test\asm\val %1.$1.prg
+	echo off
+	echo on
 	$(if $(QUIET),echo asm/val/$$*.$1.prg)
 	$(CA65) -t sim$1 -o $$(@:.prg=.o) $$< $(NULLERR)
 	$(LD65) -C sim6502-asmtest.cfg -o $$@ $$(@:.prg=.o) sim$1.lib $(NULLERR)
