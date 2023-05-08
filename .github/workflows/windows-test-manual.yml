@@ -38,8 +38,10 @@ jobs:
         run: make lib QUIET=1 SHELL=cmd
 
       - name: Run the regression tests (make test)
-        shell: cmd
-        run: make test QUIET=1 SHELL=cmd
+        #shell: cmd
+        #run: make test QUIET=1 SHELL=cmd
+        shell: pwsh
+        run: make -d test QUIET=1 SHELL=pwsh
 
       - name: Test that the samples can be built (make samples)
         shell: cmd
