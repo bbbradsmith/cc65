@@ -851,17 +851,24 @@ static char *filterInput (FILE *F, char *tbl)
     int a, prevchar = -1, i = 0, bracket = 0, quote = 1;
 
     a = getc(F);
-    while (1)
-    {
+    while (1) {
         if (i >= BLOODY_BIG_BUFFER) {
-            AbEnd ("File too large for internal parsing buffer (%d bytes).",BLOODY_BIG_BUFFER);
+            AbEnd ("File too large for internal parsing buffer (%d bytes)",BLOODY_BIG_BUFFER);
         }
-        if ((a == '\n') || (a == '\015')) a = ' ';
-        if (a == ',' && quote) a = ' ';
-        if (a == '\042') quote =! quote;
+        if (((a == '\n') || (a == '\015')) ||
+            (a == ',' && quote)) {
+            a = ' ';
+        }
+        if (a == '\042') {
+            quote =! quote;
+        }
         if (quote) {
-            if ((a == '{') || (a == '(')) bracket++;
-            if ((a == '}') || (a == ')')) bracket--;
+            if ((a == '{') || (a == '(')) {
+                bracket++;
+            }
+            if ((a == '}') || (a == ')')) {
+                bracket--;
+            }
         }
         if (a == EOF) {
             tbl[i] = '\0';
