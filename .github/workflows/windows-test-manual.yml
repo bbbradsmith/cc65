@@ -35,7 +35,7 @@ jobs:
 
       - name: Build the platform libraries (make lib)
         shell: cmd
-        run: make -d -j2 lib QUIET=1 SHELL=cmd
+        run: make -j2 lib QUIET=1 SHELL=cmd
 
       - name: Run the regression tests (make test)
         shell: cmd
