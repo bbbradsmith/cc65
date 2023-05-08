@@ -31,16 +31,16 @@ jobs:
 
       - name: Build utils (MinGW)
         shell: cmd
-        run: make -j2 util
+        run: make -j2 util SHELL=cmd
 
       - name: Build the platform libraries (make lib)
         shell: cmd
-        run: make -j2 lib QUIET=1
+        run: make -j2 lib QUIET=1 SHELL=cmd
 
       - name: Run the regression tests (make test)
         shell: cmd
-        run: make -d test QUIET=1 SHELL=C:\Windows\system32\cmd.EXE
+        run: make test QUIET=1 SHELL=cmd
 
       - name: Test that the samples can be built (make samples)
         shell: cmd
-        run: make -j2 samples
+        run: make -j2 samples SHELL=cmd
