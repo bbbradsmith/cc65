@@ -1,7 +1,6 @@
 name: Windows Test Caching
 
 on: [pull request]
-  workflow_dispatch:
 
 #on
 #  schedule:
