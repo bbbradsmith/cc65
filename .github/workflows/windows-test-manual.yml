@@ -1,8 +1,5 @@
 name: Windows Test Caching
 
-  # also pull request for testing
-on: [pull request]
-
 on:
   #schedule:
   #  - cron: '0 0 */5 * *'
