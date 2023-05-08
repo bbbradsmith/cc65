@@ -170,10 +170,6 @@ else
   SRCDIR = $(TARGET)
 endif
 
-# the shared object directories make these dependent
-apple2enh: apple2
-atarixl: atari
-
 SRCDIRS = $(SRCDIR)
 
 ifeq ($(TARGET),$(filter $(TARGET),$(CBMS)))
