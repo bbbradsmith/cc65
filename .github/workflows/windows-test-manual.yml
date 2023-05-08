@@ -41,7 +41,7 @@ jobs:
         #shell: cmd
         #run: make test QUIET=1 SHELL=cmd
         shell: pwsh
-        run: make -d test QUIET=1 SHELL=pwsh
+        run: make -d test QUIET=1 SHELL=powershell
 
       - name: Test that the samples can be built (make samples)
         shell: cmd
