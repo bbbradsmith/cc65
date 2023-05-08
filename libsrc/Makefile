@@ -158,17 +158,21 @@ GEOSDIRS = common      \
 
 ifeq ($(TARGET),apple2enh)
   SRCDIR = apple2
-  OBJPFX = a2e
+  OBJPFX = a2
   DRVPFX = a2e
 else ifeq ($(TARGET),atarixl)
   SRCDIR = atari
-  OBJPFX = atrx
+  OBJPFX = atr
   DRVPFX = atrx
 else ifeq ($(TARGET),sim65c02)
   SRCDIR = sim6502
 else
   SRCDIR = $(TARGET)
 endif
+
+# the shared object directories make these dependent
+apple2enh: apple2
+atarixl: atari
 
 SRCDIRS = $(SRCDIR)
 
