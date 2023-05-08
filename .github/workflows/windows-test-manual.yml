@@ -1,12 +1,12 @@
 name: Windows Test Caching
 
 on:
+  # also pull request for testing
+  [pull request]
   #schedule:
   #  - cron: '0 0 */5 * *'
   workflow_dispatch:
     # Allow manual dispatch.
-  # also pull request
-  [pull request]
 
 jobs:
   build_windows:
