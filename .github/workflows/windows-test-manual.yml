@@ -1,10 +1,13 @@
 name: Windows Test Caching
 
-on:
-  #schedule:
-  #  - cron: '0 0 */5 * *'
+on: [pull request]
   workflow_dispatch:
-    # Allow manual dispatch.
+
+#on
+#  schedule:
+#    - cron: '0 0 */5 * *'
+#  workflow_dispatch:
+#    # Allow manual dispatch.
 
 jobs:
   build_windows:
@@ -52,7 +55,12 @@ jobs:
       - name: Build the platform libraries (make lib)
         if: steps.check-sha.outputs.cache-hit != 'true'
         shell: cmd
-        run: make lib QUIET=1 SHELL=cmd
+        # -j2 fails mysteriously
+        #run: make -j2 lib QUIET=1 SHELL=cmd
+        # without -j2 is fine
+        #run: make lib QUIET=1 SHELL=cmd
+        # attempt without quiet?
+        run: make lib -j2 SHELL=cmd
 
       - name: Run the regression tests (make test)
         if: steps.check-sha.outputs.cache-hit != 'true'
