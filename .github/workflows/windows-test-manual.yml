@@ -1,8 +1,9 @@
 name: Windows Test Caching
 
-on:
   # also pull request for testing
-  [pull request]
+on: [pull request]
+
+on:
   #schedule:
   #  - cron: '0 0 */5 * *'
   workflow_dispatch:
