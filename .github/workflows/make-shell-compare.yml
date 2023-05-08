@@ -1,0 +1,365 @@
+name: Windows Test Shell Speeds
+
+# to test
+on: [pull_request]
+
+jobs:
+  build_windows_1:
+    name: Build, Test (Windows MSVC) cmd, pwsh, sh
+    runs-on: windows-latest
+
+    steps:
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) cmd
+        shell: cmd
+        run: make -j2 util SHELL=cmd
+
+      - name: Build the platform libraries (make lib) cmd
+        shell: cmd
+        run: make lib QUIET=1 SHELL=cmd
+
+      - name: Run the regression tests (make test) cmd
+        shell: cmd
+        run: make test QUIET=1 SHELL=cmd
+
+      - name: Test that the samples can be built (make samples) cmd
+        shell: cmd
+        run: make -j2 samples SHELL=cmd
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) pwsh
+        shell: cmd
+        run: make -j2 util SHELL=pwsh
+
+      - name: Build the platform libraries (make lib) pwsh
+        shell: cmd
+        run: make lib QUIET=1 SHELL=pwsh
+
+      - name: Run the regression tests (make test) pwsh
+        shell: cmd
+        run: make test QUIET=1 SHELL=pwsh
+
+      - name: Test that the samples can be built (make samples) pwsh
+        shell: cmd
+        run: make -j2 samples SHELL=pwsh
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) sh
+        shell: cmd
+        run: make -j2 util SHELL=sh
+
+      - name: Build the platform libraries (make lib) sh
+        shell: cmd
+        run: make lib QUIET=1 SHELL=sh
+
+      - name: Run the regression tests (make test) sh
+        shell: cmd
+        run: make test QUIET=1 SHELL=sh
+
+      - name: Test that the samples can be built (make samples) sh
+        shell: cmd
+        run: make -j2 samples SHELL=sh
+
+  build_windows_2:
+    name: Build, Test (Windows MSVC) sh, cmd, pwsh
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) sh
+        shell: cmd
+        run: make -j2 util SHELL=sh
+
+      - name: Build the platform libraries (make lib) sh
+        shell: cmd
+        run: make lib QUIET=1 SHELL=sh
+
+      - name: Run the regression tests (make test) sh
+        shell: cmd
+        run: make test QUIET=1 SHELL=sh
+
+      - name: Test that the samples can be built (make samples) sh
+        shell: cmd
+        run: make -j2 samples SHELL=sh
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) cmd
+        shell: cmd
+        run: make -j2 util SHELL=cmd
+
+      - name: Build the platform libraries (make lib) cmd
+        shell: cmd
+        run: make lib QUIET=1 SHELL=cmd
+
+      - name: Run the regression tests (make test) cmd
+        shell: cmd
+        run: make test QUIET=1 SHELL=cmd
+
+      - name: Test that the samples can be built (make samples) cmd
+        shell: cmd
+        run: make -j2 samples SHELL=cmd
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) pwsh
+        shell: cmd
+        run: make -j2 util SHELL=pwsh
+
+      - name: Build the platform libraries (make lib) pwsh
+        shell: cmd
+        run: make lib QUIET=1 SHELL=pwsh
+
+      - name: Run the regression tests (make test) pwsh
+        shell: cmd
+        run: make test QUIET=1 SHELL=pwsh
+
+      - name: Test that the samples can be built (make samples) pwsh
+        shell: cmd
+        run: make -j2 samples SHELL=pwsh
+
+
+  build_windows_3:
+    name: Build, Test (Windows MSVC) pwsh, sh, cmd
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) pwsh
+        shell: cmd
+        run: make -j2 util SHELL=pwsh
+
+      - name: Build the platform libraries (make lib) pwsh
+        shell: cmd
+        run: make lib QUIET=1 SHELL=pwsh
+
+      - name: Run the regression tests (make test) pwsh
+        shell: cmd
+        run: make test QUIET=1 SHELL=pwsh
+
+      - name: Test that the samples can be built (make samples) pwsh
+        shell: cmd
+        run: make -j2 samples SHELL=pwsh
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) sh
+        shell: cmd
+        run: make -j2 util SHELL=sh
+
+      - name: Build the platform libraries (make lib) sh
+        shell: cmd
+        run: make lib QUIET=1 SHELL=sh
+
+      - name: Run the regression tests (make test) sh
+        shell: cmd
+        run: make test QUIET=1 SHELL=sh
+
+      - name: Test that the samples can be built (make samples) sh
+        shell: cmd
+        run: make -j2 samples SHELL=sh
+
+      - name: Blank Slate
+        shell: bash
+        run: ls -A1 | xargs rm -rf
+      - name: Git Configure
+        shell: bash
+        run: git config --global core.autocrlf input
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Git Setup
+        shell: bash
+        run: git config --global core.autocrlf input
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app (MSVC debug)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Debug
+
+      - name: Build app (MSVC release)
+        run: msbuild src\cc65.sln -t:rebuild -property:Configuration=Release
+
+      - name: Build utils (MinGW) cmd
+        shell: cmd
+        run: make -j2 util SHELL=cmd
+
+      - name: Build the platform libraries (make lib) cmd
+        shell: cmd
+        run: make lib QUIET=1 SHELL=cmd
+
+      - name: Run the regression tests (make test) cmd
+        shell: cmd
+        run: make test QUIET=1 SHELL=cmd
+
+      - name: Test that the samples can be built (make samples) cmd
+        shell: cmd
+        run: make -j2 samples SHELL=cmd
