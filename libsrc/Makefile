@@ -158,11 +158,11 @@ GEOSDIRS = common      \
 
 ifeq ($(TARGET),apple2enh)
   SRCDIR = apple2
-  OBJPFX = a2
+  OBJPFX = a2e
   DRVPFX = a2e
 else ifeq ($(TARGET),atarixl)
   SRCDIR = atari
-  OBJPFX = atr
+  OBJPFX = atrx
   DRVPFX = atrx
 else ifeq ($(TARGET),sim65c02)
   SRCDIR = sim6502
