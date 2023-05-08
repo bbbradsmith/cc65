@@ -39,9 +39,7 @@ jobs:
 
       - name: Run the regression tests (make test)
         shell: cmd
-        run: |
-          set SHELL=C:\Windows\system32\cmd.EXE
-          make -d test QUIET=1
+        run: make -d test QUIET=1 SHELL=cmd
 
       - name: Test that the samples can be built (make samples)
         shell: cmd
