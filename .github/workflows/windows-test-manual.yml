@@ -2,7 +2,7 @@ name: Windows Test Caching
 
 on:
   [pull_request]
-  workflow_dispatch:
+#  workflow_dispatch:
 
 
 #on
