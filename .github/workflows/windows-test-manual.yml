@@ -5,6 +5,8 @@ on:
   #  - cron: '0 0 */5 * *'
   workflow_dispatch:
     # Allow manual dispatch.
+  # also pull request
+  [pull request]
 
 jobs:
   build_windows:
