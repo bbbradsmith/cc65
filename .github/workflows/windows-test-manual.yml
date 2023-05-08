@@ -39,7 +39,7 @@ jobs:
 
       - name: Run the regression tests (make test)
         shell: cmd
-        run: make test QUIET=1
+        run: make -d test QUIET=1
 
       - name: Test that the samples can be built (make samples)
         shell: cmd
