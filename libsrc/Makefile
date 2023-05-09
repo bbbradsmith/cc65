@@ -251,6 +251,7 @@ $$($1_DRVPAT): $$($1_DYNPAT) $$(ZPOBJ) | $$($1_DRVDIR)
 	@$$(LD65) -o $$@ -t module $$^
 
 $$($1_DYNDIR) $$($1_DRVDIR):
+	@echo call MKDIR(1) $$@
 	@$$(call MKDIR,$$@)
 
 $(TARGET): $$($1_DRVS)
@@ -299,6 +300,7 @@ $(EXTRA_OBJS): | ../lib
 	$(AR65) a $@ $?
 
 ../libwrk/$(TARGET) ../lib ../target/$(TARGET)/util:
+	@echo call MKDIR(2) $$@
 	@$(call MKDIR,$@)
 
 $(TARGET): $(EXTRA_OBJS) ../lib/$(TARGET).lib
