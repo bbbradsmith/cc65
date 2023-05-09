@@ -122,8 +122,12 @@ endef # ZIP_recipe
 zip:
 	$(foreach dir,$(OUTPUTDIRS),$(ZIP_recipe))
 
-$(TARGETS):
+$(TARGETS): | ../lib
 	@$(MAKE) --no-print-directory $@
+
+# ../lib must be created globally before doing lib targets in parallel
+../lib:
+	@$(call MKDIR,$@)
 
 else # TARGET
 
@@ -251,7 +255,6 @@ $$($1_DRVPAT): $$($1_DYNPAT) $$(ZPOBJ) | $$($1_DRVDIR)
 	@$$(LD65) -o $$@ -t module $$^
 
 $$($1_DYNDIR) $$($1_DRVDIR):
-	@echo call MKDIR(1) $$@
 	@$$(call MKDIR,$$@)
 
 $(TARGET): $$($1_DRVS)
@@ -299,8 +302,7 @@ $(EXTRA_OBJS): | ../lib
 ../lib/$(TARGET).lib: $(OBJS) | ../lib
 	$(AR65) a $@ $?
 
-../libwrk/$(TARGET) ../lib ../target/$(TARGET)/util:
-	@echo call MKDIR(2) $$@
+../libwrk/$(TARGET) ../target/$(TARGET)/util:
 	@$(call MKDIR,$@)
 
 $(TARGET): $(EXTRA_OBJS) ../lib/$(TARGET).lib
