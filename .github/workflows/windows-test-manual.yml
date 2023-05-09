@@ -62,7 +62,7 @@ jobs:
         # without -j2 is fine
         #run: make lib QUIET=1 SHELL=cmd
         # attempt without quiet?
-        run: make -O -j2 lib SHELL=cmd
+        run: make -j2 lib SHELL=cmd
 
       - name: Run the regression tests (make test)
         if: steps.check-sha.outputs.cache-hit != 'true'
